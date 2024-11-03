@@ -9,6 +9,9 @@ import AutoImport from 'unplugin-auto-import/vite'
 import { defineConfig } from 'vite'
 import EnvironmentPlugin from 'vite-plugin-environment'
 import { ENV_VARIABLE_EXPORTER_FOR_AUTO_IMPORT } from './config/env/ENV_AUTO_IMPORT.mjs'
+import sass from 'sass'
+
+sass.NodePackageImporter
 
 import {
 	ENV_OBJECT_DEFAULT,
@@ -153,9 +156,10 @@ export default defineConfig(async ({ mode }) => {
 			},
 			preprocessorOptions: {
 				scss: {
+					api: 'modern-compiler',
 					additionalData: `
-            @import "assets/styles/main.scss";
-            `,
+            @use "assets/styles/main.scss" as *;
+          `,
 				},
 			},
 		},
